@@ -1,0 +1,16 @@
+---
+image:
+  registry: ${LOCAL_REGISTRY}
+  repository: ${MARIADB_TARGET_REPO}
+  tag: ${MARIADB_TAG}
+primary:
+  persistence:
+    storageClass: ${SC_WORDPRESS}
+  containerSecurityContext:
+    runAsUser: ${MARIADB_UID}
+  podSecurityContext:
+    fsGroup: ${MARIADB_GID}
+auth:
+  existingSecret: ${SECRET_MARIADB}
+  database: ${WP_DB_NAME}
+  username: ${WP_DB_USER}

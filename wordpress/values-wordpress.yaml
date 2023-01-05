@@ -1,0 +1,26 @@
+---
+image:
+  registry: ${LOCAL_REGISTRY}
+  repository: ${WORDPRESS_TARGET_REPO}
+  tag: ${WORDPRESS_TAG}
+persistence:
+  storageClass: ${SC_WORDPRESS}
+containerSecurityContext:
+  runAsUser: ${WORDPRESS_UID}
+podSecurityContext:
+  fsGroup: ${WORDPRESS_GID}
+mariadb:
+  enabled: no
+externalDatabase:
+  host: ${SVC_MARIADB}.${NS_MARIADB}.svc.cluster.local
+  database: ${WP_DB_NAME}
+  user: ${WP_DB_USER}
+  existingSecret: ${SECRET_WORDPRESS}
+wordpressUsername: ${WP_USERNAME}
+existingSecret: ${SECRET_WORDPRESS}
+service:
+  type: ClusterIP
+serviceAccount:
+  create: yes
+  name: ${SA_WORDPRESS}
+allowEmptyPassword: no

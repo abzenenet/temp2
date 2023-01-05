@@ -1,0 +1,16 @@
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: ${ROUTE_WORDPRESS}
+  namespace: ${NS_WORDPRESS}
+spec:
+  host: ${WORDPRESS_DOMAIN}
+  tls:
+    insecureEdgeTerminationPolicy: Redirect
+  to:
+    kind: Service
+    name: ${SVC_WORDPRESS}
+    weight: 100
+  port:
+    targetPort: http
